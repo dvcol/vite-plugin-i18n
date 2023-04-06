@@ -9,7 +9,6 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
-    "rootDir": "lib",
     "outDir": "dist",
     "baseUrl": "lib",
     "declaration": true,

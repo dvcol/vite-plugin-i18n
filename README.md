@@ -26,7 +26,7 @@ Where src/root is the given root folder containing files to be parsed.
 
 ## Usage
 
-Install dev dependency :
+#### Install dev dependency :
 
 ```shell
 yarn add vite-plugin-i18n -D
@@ -34,7 +34,7 @@ npm install vite-plugin-i18n --save-dev
 pnpm install vite-plugin-i18n --save-dev
 ```
 
-Add the plugin to your `vite.config.ts` :
+#### Add the plugin to your `vite.config.ts`:
 
 ```typescript
 // vite.config.ts
@@ -48,6 +48,16 @@ export default {
     }),
   ],
 };
+```
+
+#### Use virtual module :
+
+```typescript
+import { locales, watchLocales } from 'virtual:vite-plugin-i18n';
+
+console.info('My locales at runtime', locales);
+
+watchLocales((data: Locale) => console.info('My locales on hot reload', data));
 ```
 
 ## API
@@ -87,26 +97,28 @@ dist
 
 You can provide a custom folder path, file name, or file name resolver like this:
 
-```
+```typescript
 viteI18nPlugin({
   path: "src/i18n",
   out: "dist/locales",
-}),
+});
 ```
-```
+
+```typescript
  viteI18nPlugin({
   path: "src/i18n",
   out: {
     dir: 'dist/_locales'
     name: 'my-custom-name'
   },
-}),
+})
 ```
-```
- viteI18nPlugin({
+
+```typescript
+viteI18nPlugin({
   path: "src/i18n",
-  out: (locale, messages) => `prefix-${locale}-${messages['suffixe']}.json`,
-}),
+  out: (locale, messages) => `prefix-${locale}-${messages["suffixe"]}.json`,
+});
 ```
 
 ## License

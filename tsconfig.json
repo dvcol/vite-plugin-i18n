@@ -15,8 +15,16 @@
     "noEmit": true,
     "paths": {
       "@lib/*": ["*"]
-    }
+    },
+    "typeRoots": ["lib/virtual.d.ts", "node_modules/@types"]
   },
-  "include": ["lib", ".eslintrc.cjs"],
-  "exclude": ["**/*.spec.ts", "**/*.spec.tsx", "**/*.test.ts", "**/*.test.tsx", "dist", "node_modules"]
+  "include": ["lib", ".eslintrc.cjs", "lib/virtual.d.ts"],
+  "exclude": [
+    "**/*.spec.ts",
+    "**/*.spec.tsx",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "dist",
+    "node_modules"
+  ]
 }

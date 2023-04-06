@@ -117,7 +117,7 @@ const writeBundle = ({ path, messages, out }: WriteBundleOptions) => {
 
     if (!_locales?.length) return;
 
-    console.debug(`${chalk.blueBright(`vite-plugin-i18n v${pkg.version}`)} ${chalk.greenBright(`Writing ${_locales.length} locales...`)}`);
+    console.debug(`\n${chalk.cyan(`vite-plugin-i18n v${pkg.version}`)} ${chalk.green(`Writing ${_locales.length} locales...`)}`);
 
     _locales.forEach(locale => {
       const _path = resolver(locale, messages[locale]);
@@ -133,7 +133,7 @@ const writeBundle = ({ path, messages, out }: WriteBundleOptions) => {
             console.error(`Failed to write locale '${locale}'`, { locale, _dir, _path, err });
             return err;
           }
-          console.debug(chalk.grey(`${_path}`, 'background-color: #0f111a;'));
+          console.debug(chalk.dim(`${_path}`, 'background-color: #0f111a;'));
         });
       });
     });
@@ -173,7 +173,7 @@ const emitHotReload = ({ file, server, path, messages, files }: EmitHotReloadOpt
  * Serving a Virtual File with all translations and write bundle
  */
 const viteI18nPlugin = ({ path, out }: LocalesOptions): PluginOption => {
-  const virtualFileId = 'vite-plugin-i18n';
+  const virtualModuleId = 'virtual:vite-plugin-i18n';
   const { files, messages } = getLocales(path);
 
   return {
@@ -182,18 +182,27 @@ const viteI18nPlugin = ({ path, out }: LocalesOptions): PluginOption => {
       writeBundle({ path, messages, out });
     },
     resolveId(id: string | number) {
-      if (id === virtualFileId) return virtualFileId;
+      if (id === virtualModuleId) return virtualModuleId;
+      return undefined;
     },
     load(id: string | number) {
-      if (id === virtualFileId) return `export const messages = ${JSON.stringify(messages)}`;
+      if (id === virtualModuleId) {
+        return `
+         export const locales = ${JSON.stringify(messages)}
+         
+         export const watchLocales = (cb) => {
+          if (import.meta.hot) {
+            import.meta.hot.on('locales-update', data => cb?.(data));
+          }
+         };
+        `;
+      }
     },
     handleHotUpdate({ file, server }: { file: string; server: ViteDevServer }) {
       emitHotReload({ file, server, path, messages, files });
     },
   };
 };
-
-export const messages = {};
 
 export { viteI18nPlugin, getMessages, writeBundle };
 export type { Locale, PathResolver, OutOptions, LocalesOptions, WriteBundleOptions };

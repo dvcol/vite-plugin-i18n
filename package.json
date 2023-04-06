@@ -1,0 +1,74 @@
+{
+  "name": "@dvcol/typescript-lib-template",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "<description>",
+  "homepage": "https://github.com/dvcol/typescript-lib-template",
+  "bugs": "https://github.com/dvcol/typescript-lib-template/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dvcol/typescript-lib-template.git"
+  },
+  "keywords": [
+    "typescript",
+    "library",
+    "typescript-lib-template"
+  ],
+  "license": "MIT",
+  "author": "dvcol",
+  "engines": {
+    "node": ">=18",
+    "pnpm": ">= 7"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "*.md",
+    "LICENSE",
+    "dist"
+  ],
+  "scripts": {
+    "prepare": "husky install",
+    "build": "tsup lib/index.ts --format cjs,esm --dts --clean",
+    "watch": "npm run build -- --watch lib",
+    "lint": "eslint \"+(lib|scripts)/**\"",
+    "lint:fix": "eslint \"+(lib|scripts)/**\" --fix",
+    "release": "standard-version",
+    "release:changelog": "extract-changelog-release > RELEASE.md"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {},
+  "dependencies": {
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.5.1",
+    "@commitlint/config-conventional": "^17.4.4",
+    "@dvcol/eslint-plugin-presets": "^1.3.4",
+    "eslint": "^8.37.0",
+    "extract-changelog-release": "^1.0.2",
+    "husky": "^8.0.3",
+    "prettier": "^2.8.7",
+    "standard-version": "^9.5.0",
+    "tsup": "^6.7.0",
+    "typescript": "^4.9.5"
+  },
+  "pnpm": {
+    "peerDependencyRules": {
+      "ignoreMissing": [
+        "@babel/plugin-syntax-flow",
+        "@babel/plugin-transform-react-jsx",
+        "svelte@"
+      ]
+    }
+  }
+}

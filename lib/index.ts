@@ -133,7 +133,7 @@ const writeBundle = ({ path, messages, out }: WriteBundleOptions) => {
             console.error(`Failed to write locale '${locale}'`, { locale, _dir, _path, err });
             return err;
           }
-          console.debug(chalk.dim(`${_path}`, 'background-color: #0f111a;'));
+          console.debug(chalk.dim(`${_path}`));
         });
       });
     });

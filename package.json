@@ -1,7 +1,7 @@
 {
   "name": "@dvcol/vite-plugin-i18n",
   "type": "module",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "Vite plugin to generate merged i18n locales",
   "homepage": "https://github.com/dvcol/vite-plugin-i18n",
   "bugs": "https://github.com/dvcol/vite-plugin-i18n/issues",

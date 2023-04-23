@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.3](https://github.com/dvcol/vite-plugin-i18n/compare/v1.1.2...v1.1.3) (2023-04-23)
+
+
+### Bug Fixes
+
+* **hmr:** fix hot module reload ([09c6ce3](https://github.com/dvcol/vite-plugin-i18n/commit/09c6ce394d866bc5fe9c88976122df034d91ea55))
+
 ### [1.1.2](https://github.com/dvcol/vite-plugin-i18n/compare/v1.1.1...v1.1.2) (2023-04-06)
 
 

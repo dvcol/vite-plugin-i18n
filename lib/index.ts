@@ -160,7 +160,7 @@ const emitHotReload = ({ file, server, path, messages, files }: EmitHotReloadOpt
     files = getFiles(path, 'json');
     messages = files.reduce(getMessages, {});
 
-    server.ws.send({
+    server.ws.send('virtual:vite-plugin-i18n', {
       type: 'custom',
       event: 'locales-update',
       data: messages,

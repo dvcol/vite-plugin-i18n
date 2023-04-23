@@ -60,6 +60,16 @@ console.info('My locales at runtime', locales);
 watchLocales((data: Locale) => console.info('My locales on hot reload', data));
 ```
 
+#### Use hot module reload :
+
+```typescript
+if (import.meta.hot) {
+  import.meta.hot.on('virtual:vite-plugin-i18n', ({ data }) => {
+    console.info(data) // new locale
+  })
+}
+```
+
 ## API
 
 ### options
